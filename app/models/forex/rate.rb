@@ -12,8 +12,8 @@ module Forex
               length: { maximum: 5 },
               inclusion: { in: Forex.config.currencies }
 
-    def multiplier
-      currency == Forex.config.base_currency ? 1.0 : self[:multiplier]
+    def self.index_by_currency
+      all.to_h { |rate| [rate.currency, rate.multiplier] }.presence || { Forex.config.base_currency => 1.0 }
     end
   end
 end
