@@ -11,5 +11,9 @@ module Forex
               uniqueness: true,
               length: { maximum: 5 },
               inclusion: { in: Forex.config.currencies }
+
+    def multiplier
+      currency == Forex.config.base_currency ? 1.0 : self[:multiplier]
+    end
   end
 end
